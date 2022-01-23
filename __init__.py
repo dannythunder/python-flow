@@ -4,7 +4,7 @@ import json
 import os
 
 class Flow:
-  def rpcCall(method, endpoint, namespace=None, objectId=None, data=None, params=None):
+  def httpCall(method, endpoint, namespace=None, objectId=None, data=None, params=None):
 
     load_dotenv()
 
@@ -54,10 +54,10 @@ class Flow:
       params["sorting.by"] = sortBy
       params["sorting.order"] = sortOrder
 
-    return Flow.rpcCall("LIST", endpoint, objectId=objectId, params=params)
+    return Flow.httpCall("LIST", endpoint, objectId=objectId, params=params)
 
   def httpOpen(endpoint, objectId):
-    return Flow.rpcCall("OPEN", endpoint, objectId=objectId)
+    return Flow.httpCall("OPEN", endpoint, objectId=objectId)
 
   def httpCreate(endpoint, data, objectId=None):
-    return Flow.rpcCall("CREATE", endpoint, objectId=objectId, data=data)
+    return Flow.httpCall("CREATE", endpoint, objectId=objectId, data=data)
