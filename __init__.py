@@ -61,3 +61,6 @@ class Flow:
 
   def httpCreate(endpoint, data, objectId=None):
     return Flow.httpCall("CREATE", endpoint, objectId=objectId, data=data)
+
+  def httpUpdate(endpoint, data, objectId=None):
+    return Flow.httpCall("UPDATE", endpoint, objectId=objectId, data=data)
