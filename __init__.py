@@ -27,7 +27,7 @@ class Flow:
     else:
       url = url + "/api/"+endpoint.split('/')[0]+"/"+endpoint+"/"
 
-    if method in ["LIST","OPEN","DELETE"]:
+    if method in ["LIST","OPEN","DELETE"] and data is None:
       resp = requests.get(url, headers=headers)
     else:
       resp = requests.post(url, headers=headers, json=data)
@@ -56,8 +56,8 @@ class Flow:
 
     return Flow.httpCall("LIST", endpoint, objectId=objectId, params=params)
 
-  def httpOpen(endpoint, objectId):
-    return Flow.httpCall("OPEN", endpoint, objectId=objectId)
+  def httpOpen(endpoint, objectId=None, data=None):
+    return Flow.httpCall("OPEN", endpoint, objectId=objectId, data=data)
 
   def httpCreate(endpoint, data, objectId=None):
     return Flow.httpCall("CREATE", endpoint, objectId=objectId, data=data)
