@@ -9,4 +9,4 @@ authors = [
 	{ name="Daniel Ahlberg", email="daniel.ahlberg@kurbit.se" },
 ]
 description = "Python bindings for Maintrac Flow"
-dependencies = [ "dotenv","requests" ]
+dependencies = [ "python-dotenv","requests" ]
