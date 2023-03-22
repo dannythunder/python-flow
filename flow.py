@@ -9,10 +9,10 @@ class Flow:
     load_dotenv()
 
     if os.getenv('FLOW_AUTHORIZATION') == None:
-      raise Exception("Missing FLOW_AUTHORIZATION from ~/.env")
+      raise Exception("Missing FLOW_AUTHORIZATION from .env")
 
     if os.getenv('FLOW_URL') == None:
-      raise Exception("Missing FLOW_URL from ~/.env")
+      raise Exception("Missing FLOW_URL from .env")
 
     headers = {}
 
