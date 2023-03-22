@@ -1,16 +1,19 @@
 import requests
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 import json
 import os
 
 class Flow:
   def httpCall(method, endpoint, namespace=None, objectId=None, data=None, params=None):
 
-    load_dotenv()
+    config = dotenv_values('~/.env')
+
+    if 'FLOW_AUTHORIZATION' not in config:
+      raise Exception("Missing FLOW_AUTHORIZATION from ~/.env")
 
     headers = {}
 
-    headers["Authorization"] = os.getenv("FLOW_AUTHORIZATION") if len(os.getenv("FLOW_AUTHORIZATION")) > 0 else quit("Missing FLOW_AUTHORIZATION from ~/.env")
+    headers["Authorization"] = config["FLOW_AUTHORIZATION"]
     headers["Flow-Request-Method"] = method
     headers["Flow-Request-Namespace"] = endpoint
 
