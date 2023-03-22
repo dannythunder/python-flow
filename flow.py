@@ -1,19 +1,22 @@
 import requests
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 import json
 import os
 
 class Flow:
   def httpCall(method, endpoint, namespace=None, objectId=None, data=None, params=None):
 
-    config = dotenv_values('~/.env')
+    load_dotenv()
 
-    if 'FLOW_AUTHORIZATION' not in config:
+    if os.getenv('FLOW_AUTHORIZATION') == None:
       raise Exception("Missing FLOW_AUTHORIZATION from ~/.env")
+
+    if os.getenv('FLOW_URL') == None:
+      raise Exception("Missing FLOW_URL from ~/.env")
 
     headers = {}
 
-    headers["Authorization"] = config["FLOW_AUTHORIZATION"]
+    headers["Authorization"] = os.getenv("FLOW_AUTHORIZATION")
     headers["Flow-Request-Method"] = method
     headers["Flow-Request-Namespace"] = endpoint
 
@@ -23,7 +26,7 @@ class Flow:
     if objectId is not None:
       headers["Flow-Request-ObjectId"] = objectId
 
-    url = os.getenv("FLOW_URL") if len(os.getenv("FLOW_URL")) > 0 else quit("Missing FLOW_URL from ~/.env")
+    url = os.getenv("FLOW_URL")
 
     if endpoint.split('/')[0] == "catalogue":
       url = url + "/api/product/"+endpoint+"/"
