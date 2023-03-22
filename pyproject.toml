@@ -1,0 +1,12 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-flow"
+version = "0.0.1"
+authors = [
+	{ name="Daniel Ahlberg", email="daniel.ahlberg@kurbit.se" },
+]
+description = "Python bindings for Maintrac Flow"
+dependencies = [ "dotenv","requests" ]
