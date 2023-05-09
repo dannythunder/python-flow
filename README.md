@@ -20,18 +20,18 @@ This python library enables for you to develop methods for Flow on your own comp
 ```pip3 install git+https://github.com/natgruppen/python-flow.git```
 
 ## Environment variables
-.env file with
+.env file with or shell env. with following variables:
 
 ### Required
-```FLOW_AUTHORIZATION=Basic {{FLOW_API_TOKEN}}``` <br> Your http api token
-```FLOW_URL=https://flow.kurbit.se``` <br> Base url to Flow, no trailing /
+```FLOW_AUTHORIZATION=Basic {{FLOW_API_TOKEN}}``` Your http api token<br>
+```FLOW_URL=https://flow.kurbit.se``` Base url to Flow, no trailing /<br> 
 
 ### Optional
 ```FLOW_SECURE_REQUEST=True / False``` Allows for making request to unsecure ssl servers (i.e test servers might be using self signed cert)
 
 ## Need to know
-When developing outside Flow, you have to use httpOpen instead of rpcOpen (same goes for all of the method types). <br>
-So when you post your finished code back to Flow, you have to replace all http*** to rpc***.
+When developing outside Flow, you have to use ```httpOpen``` instead of ```rpcOpen``` (same goes for all of the method types). <br>
+So when you post your finished code back to Flow, you have to replace all ```http***``` to ```rpc***```.
 
 ## Usage
 Se script in [Example files](Examples/)
