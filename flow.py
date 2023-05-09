@@ -2,8 +2,10 @@ import requests
 from dotenv import load_dotenv
 import json
 import os
+import warnings
 
 class Flow:
+  
   def httpCall(method, endpoint, namespace=None, objectId=None, data=None, params=None):
 
     load_dotenv()
@@ -13,6 +15,11 @@ class Flow:
 
     if os.getenv('FLOW_URL') == None:
       raise Exception("Missing FLOW_URL from .env")
+    
+    secureRequest = True if os.getenv('FLOW_SECURE_REQUEST') is None else os.getenv('FLOW_SECURE_REQUEST') == "True"
+
+    if(secureRequest == False):
+      warnings.filterwarnings("ignore", message="Unverified HTTPS request")
 
     headers = {}
 
@@ -33,13 +40,23 @@ class Flow:
     else:
       url = url + "/api/"+endpoint.split('/')[0]+"/"+endpoint+"/"
 
-    if method in ["LIST","OPEN","DELETE"] and data is None:
-      resp = requests.get(url, headers=headers)
-    else:
-      resp = requests.post(url, headers=headers, json=data)
-
-    return resp.json()
-
+    try:
+      if method in ["LIST","OPEN","DELETE"] and data is None:
+        resp = requests.get(url, headers=headers, verify=secureRequest)
+      else:
+        resp = requests.post(url, headers=headers, json=data, verify=secureRequest)
+    except requests.exceptions.SSLError:
+      print("Unsecured SSL attempt, add FLOW_SECURE_REQUEST=False to .env file or shell env.")
+    except Exception as ex:
+      print("Unknown exception:" + str(ex))
+    
+    try:
+      return resp.json()
+    except requests.exceptions.JSONDecodeError as jsonError:
+      raise Exception("Could not convert to json, response: " + str(resp))
+    except Exception as ex:
+      raise Exception("Unknown exception:" + str(ex))
+    
   def httpList(endpoint, objectId=None, searchItems=None, sortBy=None, sortOrder="ASC"):
     params = None
 

@@ -1,5 +1,7 @@
 # python-flow
 
+This python library enables for you to develop methods for Flow on your own computer / environment.
+
 ## Requirements <br>
 
 ### Install on Mac (using brew)
@@ -14,18 +16,22 @@
 ### Other OS:es and/or ways
 [Python3 download](https://www.python.org/downloads/)
 
-## Installation of library
+## Installation of the library
 ```pip3 install git+https://github.com/natgruppen/python-flow.git```
 
 ## Environment variables
 .env file with
 
-```FLOW_AUTHORIZATION=Basic {{FLOW_API_TOKEN}}``` <br>
-```FLOW_URL=https://flow.kurbit.se```
+### Required
+```FLOW_AUTHORIZATION=Basic {{FLOW_API_TOKEN}}``` <br> Your http api token
+```FLOW_URL=https://flow.kurbit.se``` <br> Base url to Flow, no trailing /
+
+### Optional
+```FLOW_SECURE_REQUEST=True / False``` Allows for making request to unsecure ssl servers (i.e test servers might be using self signed cert)
+
+## Need to know
+When developing outside Flow, you have to use httpOpen instead of rpcOpen (same goes for all of the method types). <br>
+So when you post your finished code back to Flow, you have to replace all http*** to rpc***.
 
 ## Usage
-
-`Code
-Should
-Go
-Here`
+Se script in [Example files](Examples/)
