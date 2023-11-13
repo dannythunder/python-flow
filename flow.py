@@ -25,7 +25,7 @@ class Flow:
 
     headers["Authorization"] = os.getenv("FLOW_AUTHORIZATION")
     headers["Flow-Request-Method"] = method
-    headers["Flow-Request-Namespace"] = endpoint
+    headers["Flow-Request-Namespace"] = namespace
 
     if params != None:
       headers["Flow-Request-Parameter"] = json.dumps({"parameters": params })
