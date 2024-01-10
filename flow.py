@@ -87,3 +87,6 @@ class Flow:
 
   def httpUpdate(endpoint, data, objectId=None):
     return Flow.httpCall("UPDATE", endpoint, objectId=objectId, data=data)
+
+  def httpDelete(endpoint, data, objectId=None):
+    return Flow.httpCall("DELETE", endpoint, objectId=objectId, data=data)
